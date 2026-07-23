@@ -1,7 +1,9 @@
-import torch
+from unsloth import FastLanguageModel
 
-print(torch.cuda.is_available())
+max_seq_length = 2048
 
-if torch.cuda.is_available():
-    print(torch.cuda.get_device_name(0))
-    print(torch.cuda.get_device_properties(0).total_memory / 1024**3, "GB")
+model, tokenizer = FastLanguageModel.from_pretrained(
+    model_name="Qwen/Qwen2.5-1.5B-Instruct",
+    max_seq_length=max_seq_length,
+    load_in_4bit=True,
+)
